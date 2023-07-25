@@ -22,3 +22,4 @@ const deleteContact = (req, res, next)=>{
 
 
 module.exports= {getContacts, CreateContacts, updateContact, deleteContact}
+ 
