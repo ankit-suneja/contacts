@@ -1,24 +1,28 @@
-const getContacts =  (req, res, next)=>{
-    res.status(200).json({message:"get all contacts"})
-};
+// using asyncHandler as we will connect it with mongoDB so to avoid try catch we are using this express package
+const asyncHandler = require("express-async-handler")
 
-const CreateContacts= (req, res, next)=>{
+
+const getContacts = asyncHandler( async(req, res, next)=>{
+    res.status(200).json({message:"get all contacts"})
+});
+
+const CreateContacts= asyncHandler((req, res, next)=>{
     console.log("the body is:", req.body)
     const {name, email, contact} = req.body;
     if(!name || !email || !contact){
         res.status(400);
-        throw new Error("all fields required")
+        throw new Error("All fields required")
     }
     res.status(201).json({message:"Added contact"})
-}
+})
 
-const updateContact = (req, res, next)=>{
+const updateContact = asyncHandler((req, res, next)=>{
     res.status(200).json({message:`updated contact for ${req.params.id}`});
-}
+})
 
-const deleteContact = (req, res, next)=>{
+const deleteContact = asyncHandler((req, res, next)=>{
     res.status(200).json({message:`deleted contact for ${req.params.id}`});
-}
+})
 
 
 module.exports= {getContacts, CreateContacts, updateContact, deleteContact}
